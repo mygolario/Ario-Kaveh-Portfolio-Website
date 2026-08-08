@@ -42,8 +42,8 @@ body {
 
 .hero-veil {
   background:
-    linear-gradient(90deg, rgba(7, 7, 7, 0.72) 0%, rgba(7, 7, 7, 0.28) 42%, rgba(7, 7, 7, 0.45) 100%),
-    linear-gradient(180deg, rgba(7, 7, 7, 0.35) 0%, transparent 28%, rgba(7, 7, 7, 0.55) 78%, rgba(7, 7, 7, 0.95) 100%);
+    linear-gradient(90deg, rgba(7, 7, 7, 0.55) 0%, rgba(7, 7, 7, 0.12) 38%, rgba(7, 7, 7, 0.28) 100%),
+    linear-gradient(180deg, rgba(7, 7, 7, 0.28) 0%, transparent 32%, rgba(7, 7, 7, 0.35) 72%, rgba(7, 7, 7, 0.92) 100%);
 }
 
 .nav-link {

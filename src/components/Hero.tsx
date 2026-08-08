@@ -19,19 +19,28 @@ export function Hero() {
     <section id="top" className="relative min-h-[100svh] overflow-hidden">
       <div className="absolute inset-0">
         <motion.div
-          initial={{ scale: 1.08, opacity: 0.7 }}
+          initial={{ scale: 1.1, opacity: 0.75 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
           <Image
-            src="/images/hero-silhouette.jpg"
+            src="/images/hero-face-portrait.jpg"
             alt="Ario Kaveh cinematic portrait"
             fill
             priority
-            quality={92}
+            quality={93}
             sizes="100vw"
-            className="object-cover object-[center_30%] md:object-[center_24%] scale-[1.02]"
+            className="object-cover object-[center_22%] md:hidden"
+          />
+          <Image
+            src="/images/hero-face-wide.jpg"
+            alt="Ario Kaveh cinematic portrait"
+            fill
+            priority
+            quality={93}
+            sizes="100vw"
+            className="hidden object-cover object-center md:block scale-[1.08] lg:scale-[1.12]"
           />
         </motion.div>
         <div className="hero-veil absolute inset-0" />

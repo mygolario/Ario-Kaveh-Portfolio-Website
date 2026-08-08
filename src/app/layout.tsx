@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     title: `${site.name} · ${site.title}`,
     description: site.description,
     type: "website",
-    images: [{ url: "/images/hero-silhouette.jpg" }],
+    images: [{ url: "/images/hero-face-wide.jpg" }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} · ${site.title}`,
     description: site.description,
-    images: ["/images/hero-silhouette.jpg"],
+    images: ["/images/hero-face-wide.jpg"],
   },
   robots: { index: true, follow: true },
   icons: {
