@@ -18,7 +18,7 @@ export const projects: Project[] = [
     description:
       "Agency-grade multi-page sites from a one-line brief — describe, edit with chat, publish.",
     href: "https://vibeld.com",
-    image: "/images/horizon.png",
+    image: "/images/horizon.jpg",
     status: "live",
   },
   {
@@ -28,7 +28,7 @@ export const projects: Project[] = [
     year: "2026",
     description: "Product marketing site for a B2B analytics platform — homepage, pricing, and docs entry.",
     href: null,
-    image: "/images/sit-blue.png",
+    image: "/images/sit-blue.jpg",
     status: "coming",
   },
   {
@@ -38,7 +38,7 @@ export const projects: Project[] = [
     year: "2026",
     description: "Calm, premium multi-page site for a modern dental practice with booking intent.",
     href: null,
-    image: "/images/portrait-beam.png",
+    image: "/images/portrait-beam.jpg",
     status: "coming",
   },
   {
@@ -48,7 +48,7 @@ export const projects: Project[] = [
     year: "2026",
     description: "Warm editorial landing experience for a specialty coffee brand.",
     href: null,
-    image: "/images/walk-silhouette.png",
+    image: "/images/walk-silhouette.jpg",
     status: "coming",
   },
   {
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     year: "2026",
     description: "High-trust property marketing site with listings-ready layout.",
     href: null,
-    image: "/images/profile-red.png",
+    image: "/images/profile-red.jpg",
     status: "coming",
   },
   {
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     year: "2026",
     description: "Sharp law firm website focused on clarity, credibility, and contact conversion.",
     href: null,
-    image: "/images/portrait-upward.png",
+    image: "/images/portrait-upward.jpg",
     status: "coming",
   },
   {
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     year: "2026",
     description: "Energetic fitness brand site with programs, coaches, and membership CTA.",
     href: null,
-    image: "/images/hero-silhouette.png",
+    image: "/images/hero-silhouette.jpg",
     status: "coming",
   },
   {
@@ -88,7 +88,7 @@ export const projects: Project[] = [
     year: "2026",
     description: "Personal brand portfolio template for founders and creatives.",
     href: null,
-    image: "/images/sit-blue.png",
+    image: "/images/sit-blue.jpg",
     status: "coming",
   },
 ];

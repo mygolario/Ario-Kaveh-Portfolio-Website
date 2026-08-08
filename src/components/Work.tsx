@@ -35,6 +35,7 @@ export function Work() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  quality={88}
                   sizes="(max-width:768px) 100vw, 33vw"
                   className="object-cover transition-transform duration-[1.1s] ease-out group-hover:scale-105"
                 />

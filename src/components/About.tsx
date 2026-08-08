@@ -17,7 +17,7 @@ export function About() {
         >
           <div className="relative aspect-[4/5] overflow-hidden rounded-[1.8rem]">
             <Image
-              src="/images/portrait-upward.png"
+              src="/images/portrait-upward.jpg"
               alt="Ario Kaveh portrait"
               fill
               sizes="(max-width:1024px) 100vw, 50vw"
@@ -26,7 +26,7 @@ export function About() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
           </div>
           <div className="absolute -right-3 -bottom-3 hidden h-40 w-28 overflow-hidden rounded-2xl border border-white/10 shadow-2xl md:block lg:-right-6">
-            <Image src="/images/portrait-beam.png" alt="" fill className="object-cover" sizes="120px" />
+            <Image src="/images/portrait-beam.jpg" alt="" fill quality={88} className="object-cover" sizes="160px" />
           </div>
         </motion.div>
 

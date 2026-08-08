@@ -9,7 +9,7 @@ export function Services() {
     <section id="services" className="relative scroll-mt-24 overflow-hidden px-5 py-24 md:px-8 md:py-32">
       <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 opacity-40">
         <Image
-          src="/images/walk-silhouette.png"
+          src="/images/walk-silhouette.jpg"
           alt=""
           fill
           sizes="50vw"

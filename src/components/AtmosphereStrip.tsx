@@ -10,9 +10,10 @@ export function AtmosphereStrip() {
       <div className="mx-auto max-w-[1400px] overflow-hidden rounded-[2rem] border border-white/8">
         <div className="relative min-h-[280px] md:min-h-[420px]">
           <Image
-            src="/images/horizon.png"
+            src="/images/horizon.jpg"
             alt=""
             fill
+            quality={90}
             sizes="100vw"
             className="object-cover object-center"
           />

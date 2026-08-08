@@ -25,12 +25,13 @@ export function Hero() {
           className="absolute inset-0"
         >
           <Image
-            src="/images/hero-silhouette.png"
+            src="/images/hero-silhouette.jpg"
             alt="Ario Kaveh cinematic portrait"
             fill
             priority
+            quality={92}
             sizes="100vw"
-            className="object-cover object-[center_28%] md:object-[center_22%]"
+            className="object-cover object-[center_30%] md:object-[center_24%] scale-[1.02]"
           />
         </motion.div>
         <div className="hero-veil absolute inset-0" />
