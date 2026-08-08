@@ -24,6 +24,7 @@ export function Hero() {
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
+          {/* Narrow / mobile: original portrait framing (the look you liked) */}
           <Image
             src="/images/hero-silhouette.jpg"
             alt="Ario Kaveh cinematic portrait"
@@ -31,7 +32,17 @@ export function Hero() {
             priority
             quality={93}
             sizes="100vw"
-            className="object-cover object-[center_36%] md:object-[center_32%]"
+            className="object-cover object-[center_36%] lg:hidden"
+          />
+          {/* 1920x1080+: dedicated 16:9 compose so full face stays visible like mobile */}
+          <Image
+            src="/images/hero-desktop-1080.jpg"
+            alt="Ario Kaveh cinematic portrait"
+            fill
+            priority
+            quality={93}
+            sizes="100vw"
+            className="hidden object-cover object-center lg:block"
           />
         </motion.div>
         <div className="hero-veil absolute inset-0" />
