@@ -9,9 +9,17 @@ export const site = {
   email: "kavehcareer@gmail.com",
   cta: "Start a project",
   availability: "Open for international projects",
-  servicesNav: ["Landing pages", "Business websites", "SaaS & product sites", "UI redesign"],
+  url: "https://ario-kaveh-portfolio.vercel.app",
+  servicesNav: [
+    "Landing pages",
+    "Business websites",
+    "SaaS & product sites",
+    "Portfolio sites",
+    "UI redesign",
+  ],
   socials: {
     linkedin: "https://www.linkedin.com/in/ario-kaveh-a2497538a/",
+    // Add when ready — only non-null links render on the site
     telegram: null as string | null,
     instagram: null as string | null,
     whatsapp: null as string | null,

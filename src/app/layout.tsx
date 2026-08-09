@@ -17,7 +17,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ario-kaveh-portfolio.vercel.app"),
+  metadataBase: new URL(site.url),
   title: {
     default: `${site.name} · ${site.title}`,
     template: `%s · ${site.name}`,
@@ -27,7 +27,8 @@ export const metadata: Metadata = {
     title: `${site.name} · ${site.title}`,
     description: site.description,
     type: "website",
-    images: [{ url: "/images/hero-desktop-1080.jpg" }],
+    url: site.url,
+    images: [{ url: "/images/hero-desktop-1080.jpg", width: 1920, height: 1080 }],
   },
   twitter: {
     card: "summary_large_image",
@@ -41,10 +42,38 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  url: site.url,
+  jobTitle: site.title,
+  description: site.description,
+  email: site.email,
+  sameAs: [site.socials.linkedin].filter(Boolean),
+  knowsAbout: [
+    "Web design",
+    "Web development",
+    "Landing pages",
+    "SaaS marketing websites",
+    "Next.js",
+  ],
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${syne.variable} ${outfit.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <a
+          href="#work"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:text-black"
+        >
+          Skip to work
+        </a>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {children}
         <Analytics />
       </body>

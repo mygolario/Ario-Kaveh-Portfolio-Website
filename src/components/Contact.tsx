@@ -10,28 +10,47 @@ const socialEntries = [
   { key: "telegram", label: "Telegram", href: site.socials.telegram },
   { key: "instagram", label: "Instagram", href: site.socials.instagram },
   { key: "whatsapp", label: "WhatsApp", href: site.socials.whatsapp },
-] as const;
+].filter((item): item is { key: string; label: string; href: string } => Boolean(item.href));
 
 export function Contact() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
+  const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    const name = String(data.get("name") || "").trim();
-    const email = String(data.get("email") || "").trim();
-    const project = String(data.get("project") || "").trim();
-    const message = String(data.get("message") || "").trim();
 
-    const subject = encodeURIComponent(`Project inquiry from ${name || "your site"}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nProject type: ${project}\n\n${message}`,
-    );
+    setStatus("loading");
+    setError("");
 
-    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
-    setStatus("sent");
-    form.reset();
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          project: data.get("project"),
+          message: data.get("message"),
+          website: data.get("website"),
+        }),
+      });
+
+      const json = (await res.json()) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !json.ok) {
+        setStatus("error");
+        setError(json.error || "Could not send. Please email me directly.");
+        return;
+      }
+
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setStatus("error");
+      setError("Network error. Please email me directly.");
+    }
   }
 
   return (
@@ -54,7 +73,7 @@ export function Contact() {
           <div className="mt-10 space-y-4">
             <a
               href={`mailto:${site.email}`}
-              className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition-colors hover:border-[var(--accent)]/40"
+              className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 transition-colors hover:border-[var(--accent)]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
             >
               <div>
                 <p className="text-xs tracking-[0.16em] text-white/40 uppercase">Email</p>
@@ -63,29 +82,21 @@ export function Contact() {
               <span className="text-[var(--accent)] transition-transform group-hover:translate-x-1">→</span>
             </a>
 
-            <div className="grid grid-cols-2 gap-3">
-              {socialEntries.map((item) =>
-                item.href ? (
+            {socialEntries.length > 0 ? (
+              <div className="grid grid-cols-2 gap-3">
+                {socialEntries.map((item) => (
                   <a
                     key={item.key}
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-sm text-white transition-colors hover:border-[var(--accent)]/40"
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-sm text-white transition-colors hover:border-[var(--accent)]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent)]"
                   >
                     {item.label}
                   </a>
-                ) : (
-                  <div
-                    key={item.key}
-                    className="rounded-2xl border border-dashed border-white/10 px-4 py-4 text-sm text-white/30"
-                    title="Coming soon"
-                  >
-                    {item.label}
-                  </div>
-                ),
-              )}
-            </div>
+                ))}
+              </div>
+            ) : null}
           </div>
         </motion.div>
 
@@ -97,13 +108,23 @@ export function Contact() {
           transition={{ duration: 0.75, delay: 0.08 }}
           className="rounded-[1.8rem] border border-white/10 bg-gradient-to-br from-white/[0.05] to-white/[0.02] p-6 md:p-8"
         >
+          {/* Honeypot */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden
+            className="absolute -left-[9999px] h-0 w-0 opacity-0"
+          />
+
           <div className="grid gap-5 md:grid-cols-2">
             <label className="block text-sm text-white/60">
               Name
               <input
                 required
                 name="name"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60"
+                className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60 focus-visible:ring-2 focus-visible:ring-[var(--accent)]/40"
                 placeholder="Your name"
               />
             </label>
@@ -113,7 +134,7 @@ export function Contact() {
                 required
                 type="email"
                 name="email"
-                className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60"
+                className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60 focus-visible:ring-2 focus-visible:ring-[var(--accent)]/40"
                 placeholder="you@company.com"
               />
             </label>
@@ -123,7 +144,7 @@ export function Contact() {
             Project type
             <select
               name="project"
-              className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60"
+              className="mt-2 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60 focus-visible:ring-2 focus-visible:ring-[var(--accent)]/40"
               defaultValue="Landing page"
             >
               <option>Landing page</option>
@@ -141,18 +162,20 @@ export function Contact() {
               required
               name="message"
               rows={5}
-              className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60"
+              className="mt-2 w-full resize-y rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none transition focus:border-[var(--accent)]/60 focus-visible:ring-2 focus-visible:ring-[var(--accent)]/40"
               placeholder="Goals, timeline, references…"
             />
           </label>
 
           <div className="mt-6 flex flex-wrap items-center gap-4">
-            <GlowButton type="submit">{site.cta}</GlowButton>
+            <GlowButton type="submit">{status === "loading" ? "Sending…" : site.cta}</GlowButton>
             {status === "sent" ? (
-              <p className="text-sm text-white/55">Opening your email client…</p>
-            ) : (
+              <p className="text-sm text-emerald-400/90">Message sent. I&apos;ll reply within 24 hours.</p>
+            ) : null}
+            {status === "error" ? <p className="text-sm text-red-400/90">{error}</p> : null}
+            {status === "idle" || status === "loading" ? (
               <p className="text-sm text-white/40">Usually replies within 24 hours.</p>
-            )}
+            ) : null}
           </div>
         </motion.form>
       </div>

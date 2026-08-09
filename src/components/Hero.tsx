@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { site } from "@/data/site";
 import { GlowButton } from "@/components/GlowButton";
 
@@ -15,6 +16,16 @@ const fadeUp = {
 };
 
 export function Hero() {
+  const [desktop, setDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const apply = () => setDesktop(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
   return (
     <section id="top" className="relative min-h-[100svh] overflow-hidden">
       <div className="absolute inset-0">
@@ -24,25 +35,18 @@ export function Hero() {
           transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
           className="absolute inset-0"
         >
-          {/* Narrow / mobile: original portrait framing (the look you liked) */}
           <Image
-            src="/images/hero-silhouette.jpg"
+            src={desktop ? "/images/hero-desktop-1080.jpg" : "/images/hero-silhouette.jpg"}
             alt="Ario Kaveh cinematic portrait"
             fill
             priority
-            quality={93}
+            quality={90}
             sizes="100vw"
-            className="object-cover object-[center_36%] lg:hidden"
-          />
-          {/* 1920x1080+: dedicated 16:9 compose so full face stays visible like mobile */}
-          <Image
-            src="/images/hero-desktop-1080.jpg"
-            alt="Ario Kaveh cinematic portrait"
-            fill
-            priority
-            quality={93}
-            sizes="100vw"
-            className="hidden object-cover object-center lg:block"
+            className={
+              desktop
+                ? "object-cover object-center"
+                : "object-cover object-[center_36%]"
+            }
           />
         </motion.div>
         <div className="hero-veil absolute inset-0" />

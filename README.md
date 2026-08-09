@@ -1,14 +1,6 @@
 # Ario Kaveh Portfolio
 
-Personal portfolio for **Ario Kaveh** — Web Designer & Developer.
-
-## Stack
-
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Vercel Analytics
+Personal portfolio — Web Designer & Developer.
 
 ## Develop
 
@@ -17,16 +9,27 @@ npm install
 npm run dev
 ```
 
-## Deploy
+## Contact form
 
-Push to GitHub and import the project in the **Ario Projects** Vercel team, or:
+Works out of the box via **FormSubmit** (confirm the first activation email to `kavehcareer@gmail.com`).
 
-```bash
-npx vercel --prod
+Optional upgrade — set in Vercel / `.env.local`:
+
+```
+RESEND_API_KEY=re_...
+RESEND_FROM="Ario Portfolio <onboarding@resend.dev>"
 ```
 
-## Content
+## Demos
 
-- Site copy & socials: `src/data/site.ts`
-- Projects: `src/data/projects.ts`
-- Images: `public/images/`
+See `DEMO-BUILD-GUIDE.md` and the sibling folder:
+
+`C:\Ario Vibe Coding\Ario-Portfolio-Demos\`
+
+When a demo is live, set `status: "live"` + `href` in `src/data/projects.ts` and drop a screenshot in `public/images/work/`.
+
+## Deploy
+
+```bash
+npx vercel --prod --scope ario-projects
+```
