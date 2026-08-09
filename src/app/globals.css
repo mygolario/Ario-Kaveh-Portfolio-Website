@@ -9,6 +9,18 @@
   --accent-soft: #ff9a4a;
   --glow: rgba(255, 122, 24, 0.35);
   --background: var(--bg);
+
+  /* Editorial type scale */
+  --text-display: clamp(3.2rem, 12vw, 7.5rem);
+  --text-h1: clamp(2.4rem, 6vw, 4.5rem);
+  --text-h2: clamp(1.85rem, 4vw, 3.25rem);
+  --text-h3: clamp(1.35rem, 2.4vw, 1.85rem);
+  --text-body: clamp(0.95rem, 1.1vw, 1.05rem);
+  --text-meta: 0.72rem;
+  --leading-display: 0.9;
+  --leading-body: 1.65;
+  --tracking-display: -0.04em;
+  --tracking-meta: 0.2em;
 }
 
 @theme inline {
@@ -33,11 +45,51 @@ body {
     var(--bg);
   color: var(--foreground);
   font-family: var(--font-body), sans-serif;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   min-height: 100%;
 }
 
 .font-display {
   font-family: var(--font-display), sans-serif;
+}
+
+.text-display {
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  font-weight: 600;
+}
+
+.text-h1 {
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--text-h1);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.text-h2 {
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--text-h2);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.text-h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--text-h3);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.text-meta {
+  font-size: var(--text-meta);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
 }
 
 .hero-veil {
@@ -79,6 +131,10 @@ button {
   font: inherit;
 }
 
+option {
+  color: #111;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -96,4 +152,12 @@ button {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
+}
+
+@supports (view-transition-name: none) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
 }

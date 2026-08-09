@@ -19,16 +19,15 @@ export const site = {
   ],
   socials: {
     linkedin: "https://www.linkedin.com/in/ario-kaveh-a2497538a/",
-    // Add when ready — only non-null links render on the site
     telegram: null as string | null,
     instagram: null as string | null,
     whatsapp: null as string | null,
   },
   nav: [
-    { label: "Work", href: "#work" },
-    { label: "Services", href: "#services" },
-    { label: "About", href: "#about" },
-    { label: "Contact", href: "#contact" },
+    { label: "Work", href: "/#work" },
+    { label: "Services", href: "/#services" },
+    { label: "About", href: "/#about" },
+    { label: "Contact", href: "/#contact" },
   ],
 } as const;
 

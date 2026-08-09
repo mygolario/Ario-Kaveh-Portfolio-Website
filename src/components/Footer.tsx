@@ -19,8 +19,11 @@ export function Footer() {
           <a href={site.socials.linkedin} target="_blank" rel="noreferrer" className="hover:text-white">
             LinkedIn
           </a>
+          <a href="/work/vibeld" className="hover:text-white">
+            Vibeld case study
+          </a>
           <a href="https://vibeld.com" target="_blank" rel="noreferrer" className="hover:text-white">
-            Vibeld
+            vibeld.com
           </a>
         </div>
       </div>

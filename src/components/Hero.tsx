@@ -113,8 +113,8 @@ export function Hero() {
               animate="show"
               className="mt-8 flex flex-wrap items-center justify-center gap-3"
             >
-              <GlowButton href="#contact">{site.cta}</GlowButton>
-              <GlowButton href="#work" variant="ghost">
+              <GlowButton href="/#contact">{site.cta}</GlowButton>
+              <GlowButton href="/#work" variant="ghost">
                 View work
               </GlowButton>
             </motion.div>

@@ -1,14 +1,28 @@
+export type ProjectHighlight = {
+  label: string;
+  value: string;
+};
+
 export type Project = {
   id: string;
   title: string;
   category: string;
   year: string;
   description: string;
+  /** External live URL */
   href: string | null;
   image: string;
   status: "live" | "planned";
-  /** Short stack note for case studies */
   stack?: string;
+  /** Case study fields — required for live projects shown on /work/[slug] */
+  role?: string;
+  services?: string[];
+  overview?: string;
+  challenge?: string;
+  approach?: string;
+  outcome?: string;
+  highlights?: ProjectHighlight[];
+  gallery?: string[];
 };
 
 /** Only `live` projects render in Work. Planned demos stay here until you ship them. */
@@ -23,9 +37,24 @@ export const projects: Project[] = [
     href: "https://vibeld.com",
     image: "/images/horizon.jpg",
     status: "live",
-    stack: "Next.js · Product design",
+    stack: "Next.js · Product design · AI workflows",
+    role: "Founder · Product · Design · Engineering",
+    services: ["Product design", "Marketing site", "Full-stack build"],
+    overview:
+      "Vibeld turns a one-line business brief into a polished multi-page marketing site you can refine with chat and publish instantly — built for founders and agencies who need craft without a long production cycle.",
+    challenge:
+      "Most AI site builders feel templated. The product needed to feel agency-grade: multi-page structure, editorial design packs, chat editing that patches surgically, and a publish flow that doesn’t dump users into config hell.",
+    approach:
+      "Led product direction around describe → edit → publish. Designed a cinematic marketing presence for Vibeld itself, then engineered the builder experience so first output feels intentional — navigation, sections, imagery, and conversion paths included.",
+    outcome:
+      "A live product at vibeld.com with a clear narrative, working studio flow, and a portfolio-ready case that proves end-to-end product craft — not just a landing page.",
+    highlights: [
+      { label: "Model", value: "Brief → multi-page site" },
+      { label: "Edit", value: "Chat copilot patches" },
+      { label: "Ship", value: "Subdomain + custom domain" },
+    ],
+    gallery: ["/images/horizon.jpg", "/images/portrait-beam.jpg"],
   },
-  // --- Planned demos (hidden until status: "live" + real href + product screenshot) ---
   {
     id: "saas-nova",
     title: "Nova Metrics",
@@ -107,3 +136,20 @@ export const projects: Project[] = [
 
 export const liveProjects = projects.filter((p) => p.status === "live");
 export const plannedProjects = projects.filter((p) => p.status === "planned");
+
+export function getProjectById(id: string) {
+  return projects.find((p) => p.id === id);
+}
+
+export function getLiveProjectById(id: string) {
+  return liveProjects.find((p) => p.id === id);
+}
+
+export function getAdjacentLiveProjects(id: string) {
+  const index = liveProjects.findIndex((p) => p.id === id);
+  if (index === -1) return { prev: null, next: null };
+  return {
+    prev: liveProjects[index - 1] ?? null,
+    next: liveProjects[index + 1] ?? null,
+  };
+}

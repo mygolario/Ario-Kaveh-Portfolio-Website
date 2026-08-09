@@ -21,6 +21,7 @@ type GlowButtonProps = {
   className?: string;
   variant?: "primary" | "ghost";
   type?: "button" | "submit";
+  disabled?: boolean;
 };
 
 export function GlowButton({
@@ -30,6 +31,7 @@ export function GlowButton({
   className,
   variant = "primary",
   type = "button",
+  disabled = false,
 }: GlowButtonProps) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
   const x = useMotionValue(0);
@@ -57,6 +59,7 @@ export function GlowButton({
       "bg-[var(--accent)] text-[var(--ink)] shadow-[0_0_0_1px_rgba(255,122,24,0.35),0_18px_50px_rgba(255,122,24,0.28)] hover:scale-[1.03] active:scale-[0.98]",
     variant === "ghost" &&
       "border border-white/20 bg-white/5 text-white backdrop-blur-md hover:border-[var(--accent)]/60 hover:bg-white/10",
+    disabled && "pointer-events-none opacity-55",
     className,
   );
 
@@ -107,10 +110,12 @@ export function GlowButton({
     <motion.button
       ref={ref as RefObject<HTMLButtonElement>}
       type={type}
+      disabled={disabled}
+      aria-disabled={disabled}
       onClick={onClick}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      whileHover={{ y: -2 }}
+      whileHover={disabled ? undefined : { y: -2 }}
       className={classes}
     >
       {content}

@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { site } from "@/data/site";
 import { GlowButton } from "@/components/GlowButton";
 import { cn } from "@/lib/cn";
@@ -9,6 +9,7 @@ import { cn } from "@/lib/cn";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuId = useId();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -24,6 +25,15 @@ export function Header() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <>
       <header
@@ -33,7 +43,7 @@ export function Header() {
         )}
       >
         <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 md:h-20 md:px-8">
-          <a href="#top" className="font-display text-xl tracking-tight text-white md:text-2xl">
+          <a href="/" className="font-display text-xl tracking-tight text-white md:text-2xl">
             {site.logo}
           </a>
 
@@ -47,7 +57,7 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <GlowButton href="#contact" className="!px-5 !py-2.5 text-xs">
+            <GlowButton href="/#contact" className="!px-5 !py-2.5 text-xs">
               {site.cta}
             </GlowButton>
           </nav>
@@ -56,6 +66,7 @@ export function Header() {
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
+            aria-controls={menuId}
             onClick={() => setOpen((v) => !v)}
             className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
           >
@@ -78,6 +89,9 @@ export function Header() {
       <AnimatePresence>
         {open ? (
           <motion.div
+            id={menuId}
+            role="dialog"
+            aria-modal="true"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -99,7 +113,7 @@ export function Header() {
                   </motion.a>
                 ))}
               </nav>
-              <GlowButton href="#contact" onClick={() => setOpen(false)} className="w-full">
+              <GlowButton href="/#contact" onClick={() => setOpen(false)} className="w-full">
                 {site.cta}
               </GlowButton>
             </div>

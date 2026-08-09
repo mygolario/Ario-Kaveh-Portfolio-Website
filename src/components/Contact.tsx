@@ -168,7 +168,9 @@ export function Contact() {
           </label>
 
           <div className="mt-6 flex flex-wrap items-center gap-4">
-            <GlowButton type="submit">{status === "loading" ? "Sending…" : site.cta}</GlowButton>
+            <GlowButton type="submit" disabled={status === "loading"}>
+              {status === "loading" ? "Sending…" : site.cta}
+            </GlowButton>
             {status === "sent" ? (
               <p className="text-sm text-emerald-400/90">Message sent. I&apos;ll reply within 24 hours.</p>
             ) : null}

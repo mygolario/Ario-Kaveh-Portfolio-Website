@@ -34,7 +34,7 @@ export function AtmosphereStrip() {
                 Strong first impression, clear offer, and motion that feels intentional — not noisy.
               </p>
               <div className="mt-6">
-                <GlowButton href="#contact">Start a project</GlowButton>
+                <GlowButton href="/#contact">Start a project</GlowButton>
               </div>
             </motion.div>
           </div>
