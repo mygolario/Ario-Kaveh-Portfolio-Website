@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { Outfit, Syne } from "next/font/google";
+import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -92,7 +93,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
         <Analytics />
       </body>
     </html>
