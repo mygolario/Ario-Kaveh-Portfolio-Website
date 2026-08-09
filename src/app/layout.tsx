@@ -8,12 +8,14 @@ const syne = Syne({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+  display: "swap",
 });
 
 const outfit = Outfit({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -63,7 +65,23 @@ const jsonLd = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${syne.variable} ${outfit.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+      <head>
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-silhouette.jpg"
+          media="(max-width: 1023px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/hero-desktop-1080.jpg"
+          media="(min-width: 1024px)"
+          fetchPriority="high"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[var(--bg)]">
         <a
           href="#work"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-full focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:text-black"
