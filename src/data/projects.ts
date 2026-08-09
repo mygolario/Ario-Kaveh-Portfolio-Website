@@ -60,11 +60,28 @@ export const projects: Project[] = [
     title: "Nova Metrics",
     category: "SaaS Marketing",
     year: "2026",
-    description: "B2B analytics marketing site — homepage, pricing, and docs entry.",
-    href: null,
-    image: "/images/work/nova-metrics.jpg",
-    status: "planned",
-    stack: "Next.js · Tailwind",
+    description:
+      "B2B ops analytics marketing site — homepage, pricing, trial flow, and product UI.",
+    href: "https://demo-nova-metrics.vercel.app",
+    image: "/images/work/nova-metrics.png",
+    status: "live",
+    stack: "Next.js · TypeScript · Tailwind · Vercel",
+    role: "Design · Front-end development",
+    services: ["SaaS marketing site", "Product UI mock", "Conversion design"],
+    overview:
+      "A cool blue/graphite SaaS marketing site for an ops analytics product — live dashboards, smart alerts, and weekly reports — built to convert founders and ops teams into trials.",
+    challenge:
+      "SaaS marketing pages often feel template-heavy. Nova needed a credible product presence: clear value prop, pricing clarity, and a dashboard preview that sells the product before signup.",
+    approach:
+      "Designed a dark, high-trust SaaS look with brand-first hero, dashboard mock as the visual anchor, then features, how-it-works, pricing, FAQ, and a trial form. Shipped as a production Next.js site on Vercel.",
+    outcome:
+      "A live demo at demo-nova-metrics.vercel.app that proves SaaS marketing craft — product UI, conversion path, and polish suitable for a mid-five-figure site engagement.",
+    highlights: [
+      { label: "Pages", value: "Home · Pricing · Legal" },
+      { label: "Proof", value: "Live dashboard preview" },
+      { label: "CTA", value: "Trial form + pricing" },
+    ],
+    gallery: ["/images/work/nova-metrics.png"],
   },
   {
     id: "atelier-dental",
